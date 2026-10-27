@@ -1,26 +1,57 @@
-# Workflow Health
+# Workflow Health - System Health Monitor
 
-Implement exactly the screenshot and nothing else
+A premium B2B observability dashboard that acts as the UI layer for an n8n meta-workflow. This app visualizes the logic of **Workflow 10 (Portfolio Health Monitor)** by simulating the aggregation of audit logs from 9 separate workflows and generating a daily Slack digest.
 
-This project was built with [Lovable](https://lovable.dev).
+**Live Demo:** [workflow-health.lovable.app](https://workflow-health.lovable.app)
 
-**Live app**: https://workflow-health.lovable.app
+## n8n Workflow Reference
 
-## Build with Lovable
+This UI is designed to accompany a self-hosted n8n automation. You can view the actual backend workflow code and documentation in my platform integration portfolio:
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/72560dae-62e9-426e-b61b-1a3c58fc4bdb).
+- **Repository:** [platform-integration-portfolio](https://github.com/Xhenzouu/platform-integration-portfolio)
+- **Workflow Documentation:** [Workflow 10: Portfolio Health Monitor](https://github.com/Xhenzouu/platform-integration-portfolio/blob/main/docs/workflows/10-portfolio-health-monitor.md)
+- **Raw Workflow JSON:** [portfolio-health-monitor.json](https://github.com/Xhenzouu/platform-integration-portfolio/blob/main/workflows/portfolio-health-monitor.json)
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+The n8n workflow handles the following logic:
 
-## Development
+1. Queries audit tables from 9 different workflows using a UNION ALL query to normalize their schemas.
+2. Computes a rollup, grouping by workflow and flagging any that are "stale" (0 runs in 24 hours).
+3. Builds a Slack Block Kit digest separating workflows into "Healthy" and "Needs Attention".
+4. Posts the digest to a Slack channel and logs the run to Supabase.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+This dashboard visualizes that exact flow: the Ledger shows the health of all 9 workflows, and the right-side drawer displays the normalized schema data and the generated Slack digest.
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## Features
+
+- **Dual Themes:** Full Light and Dark mode support with a toggle switch.
+- **Observability Metrics:** A 4-column KPI grid showing Total Workflows, Healthy, Needs Attention, and Stale.
+- **The Ledger:** An editorial-style data table that lists workflows with their last run time, run count, and a color-coded status pill.
+- **Detail Drawer:** Clicking a row opens a side panel with the normalized schema data and a mock Slack digest preview.
+- **Premium UI:** Strict flat design, stark borders, and no gradients.
+
+## Tech Stack
+
+- **Frontend:** React, TypeScript, Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+
+## Run Locally
+
+1. Clone the repo:
+
+   ```bash
+   git clone https://github.com/Xhenzouu/workflow-health.git
+   cd workflow-health
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
