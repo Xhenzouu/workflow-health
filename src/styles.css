@@ -89,7 +89,7 @@
 @theme inline {
   --color-healthy: var(--healthy); --color-warning: var(--warning); --color-stale: var(--stale);
   --color-status-foreground: var(--status-foreground);
-  --font-serif: "Playfair Display", Georgia, serif;
+  --font-serif: Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
