@@ -30,7 +30,7 @@ function Index() {
 
   const digest = () => {
     const attention = workflows.filter((w) => w.status !== "healthy");
-    setSelected(attention[0] ?? workflows[0]);
+    setSelected(attention[0] ?? workflows[0] ?? null);
   };
 
   return (
