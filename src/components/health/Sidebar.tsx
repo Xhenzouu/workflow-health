@@ -1,4 +1,4 @@
-import { Activity, ChevronsLeft, ChevronsRight, LayoutDashboard, ListChecks, Moon, Settings, Sun } from "lucide-react";
+import { Activity, ChevronLeft, ChevronRight, LayoutDashboard, ListChecks, Moon, Settings, Sun } from "lucide-react";
 
 export type View = "overview" | "workflows" | "settings";
 
@@ -22,11 +22,17 @@ export function Sidebar({ view, onNavigate, dark, onToggleTheme, collapsed, onTo
     <aside
       className={`fixed inset-y-0 left-0 z-30 flex flex-col border-r border-border bg-card transition-[width] duration-300 ${collapsed ? "w-[72px]" : "w-[260px]"}`}
     >
-      <div className="flex h-16 items-center justify-between border-b border-border px-5">
-        <div className="flex items-center gap-2 overflow-hidden">
-          <Activity size={20} className="shrink-0 text-primary" />
-          {!collapsed && <span className="whitespace-nowrap font-serif text-xl font-bold">System Health</span>}
-        </div>
+      <div className={`flex h-16 items-center border-b border-border ${collapsed ? "justify-center gap-1.5" : "gap-2 px-5"}`}>
+        <Activity size={20} className="shrink-0 text-primary" />
+        {!collapsed && <span className="whitespace-nowrap font-serif text-xl font-bold">System Health</span>}
+        <button
+          onClick={onToggleCollapse}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          className={`flex shrink-0 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground ${collapsed ? "h-6 w-6" : "ml-auto h-7 w-7"}`}
+        >
+          {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+        </button>
       </div>
 
       <nav className="flex-1 py-4">
@@ -37,8 +43,9 @@ export function Sidebar({ view, onNavigate, dark, onToggleTheme, collapsed, onTo
               key={n.id}
               onClick={() => onNavigate(n.id)}
               title={n.label}
-              className={`flex w-full items-center gap-3 border-l-4 px-5 py-3 text-xs font-semibold uppercase tracking-widest transition-colors ${
-                active ? "border-primary bg-background text-foreground" : "border-transparent text-muted-foreground hover:bg-background hover:text-foreground"
+              aria-current={active ? "page" : undefined}
+              className={`flex w-full items-center gap-3 px-5 py-3 text-xs font-semibold uppercase tracking-widest transition-colors ${
+                active ? "bg-secondary text-primary" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
             >
               <n.icon size={18} className="shrink-0" />
@@ -48,7 +55,7 @@ export function Sidebar({ view, onNavigate, dark, onToggleTheme, collapsed, onTo
         })}
       </nav>
 
-      <div className="space-y-3 border-t border-border p-4">
+      <div className={`border-t border-border ${collapsed ? "p-2" : "p-4"}`}>
         <div className={`flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
           {!collapsed && <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">{dark ? "Dark" : "Light"} Mode</span>}
           <button
@@ -61,13 +68,6 @@ export function Sidebar({ view, onNavigate, dark, onToggleTheme, collapsed, onTo
             </span>
           </button>
         </div>
-        <button
-          onClick={onToggleCollapse}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className="flex w-full items-center justify-center gap-2 rounded-sm py-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground hover:bg-background hover:text-foreground"
-        >
-          {collapsed ? <ChevronsRight size={16} /> : <><ChevronsLeft size={16} /> Collapse</>}
-        </button>
       </div>
     </aside>
   );
