@@ -1,3 +1,15 @@
+<div align="center">
+
+<img src="./assets/banner.svg" alt="Workflow Health: Query audits, Rollup, Slack digest, Log run" width="100%"/>
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+![Lucide](https://img.shields.io/badge/Lucide_React-F56565?style=for-the-badge&logo=lucide&logoColor=white)
+
+</div>
+
 # Workflow Health - System Health Monitor
 
 A premium B2B observability dashboard that acts as the UI layer for an n8n meta-workflow. This app visualizes the logic of **Workflow 10 (Portfolio Health Monitor)** by simulating the aggregation of audit logs from 9 separate workflows and generating a daily Slack digest.
@@ -28,12 +40,6 @@ This dashboard visualizes that exact flow: the Ledger shows the health of all 9 
 - **The Ledger:** An editorial-style data table that lists workflows with their last run time, run count, and a color-coded status pill.
 - **Detail Drawer:** Clicking a row opens a side panel with the normalized schema data and a mock Slack digest preview.
 - **Premium UI:** Strict flat design, stark borders, and no gradients.
-
-## Tech Stack
-
-- **Frontend:** React, TypeScript, Tailwind CSS
-- **Animations:** Framer Motion
-- **Icons:** Lucide React
 
 ## Run Locally
 
